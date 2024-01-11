@@ -12,4 +12,9 @@ public class PoliceBehaviour : MonoBehaviour
     {
             police.SetDestination(target.position);       
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+            Destroy(this.gameObject); 
+    }
 }
