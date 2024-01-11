@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class PowerUpsApplication : MonoBehaviour
@@ -7,10 +8,13 @@ public class PowerUpsApplication : MonoBehaviour
     private GameObject forceField;
 
     private Animator forceFieldAnimator;
+    private float timer;
+    private bool isActive;
 
     private void Start()
     {
-        forceField.SetActive(false);
+        isActive = false;
+        timer = 0;
         forceField.TryGetComponent(out forceFieldAnimator);
     }
 
@@ -21,26 +25,26 @@ public class PowerUpsApplication : MonoBehaviour
     }
     private IEnumerator ForceFieldFor(float duration)
     {
-        float timer = duration;
+        timer = duration;
+        
+        if(isActive)
+            yield break;
+
+        isActive = true;
 
         forceField.SetActive(true);
         forceFieldAnimator.SetTrigger("Reset");
-
-        bool animated = false;
 
         while (timer > 0)
         {
             timer -= Time.deltaTime;
 
-
-            if(timer <= 0.8 && !animated)
-            {
-                animated = true;
-                forceFieldAnimator.SetTrigger("End");
-            }
+            forceFieldAnimator.SetFloat("timer", timer);
 
             yield return null;
         }
+        
+        isActive = false;
         forceField.SetActive(false);
     }
 }

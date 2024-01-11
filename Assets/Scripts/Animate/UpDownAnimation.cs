@@ -31,9 +31,14 @@ public class UpDownAnimation : MonoBehaviour
     public void ToogleAnimation(bool animate)
     {
         if (!isAnimating && animate)
+        {
+            isAnimating = true;
             StartCoroutine(Animate());
-
-        isAnimating = animate;
+        }
+        else if(!animate)
+        {
+            isAnimating = false;
+        }
     }
 
     private IEnumerator Animate()
@@ -44,7 +49,7 @@ public class UpDownAnimation : MonoBehaviour
         {
             _time += Time.deltaTime;
 
-            float offsetY = Mathf.Sin(_time * translationSpeed * Time.deltaTime) * translationDepth;
+            float offsetY = Mathf.Sin(_time * translationSpeed) * translationDepth;
 
             transform.position = basePosition + offsetY * Vector3.up;
             transform.Rotate(Time.deltaTime * rotationSpeed * Vector3.up);

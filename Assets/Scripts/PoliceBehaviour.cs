@@ -1,17 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PoliceBehaviour : MonoBehaviour
+public class PoliceBehaviour : MonoBehaviour, IPushable
 {
     [SerializeField] private NavMeshAgent police;
     private GameObject target;
 
     private ParticleSystem ps;
+    private Rigidbody rb;
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player");
         ps = GetComponentInChildren<ParticleSystem>();
     }
@@ -28,5 +28,10 @@ public class PoliceBehaviour : MonoBehaviour
             ps.Play();
             Destroy(this.gameObject);
         }
+    }
+
+    public void Push(Vector3 force)
+    {
+        rb.AddForce(force);
     }
 }

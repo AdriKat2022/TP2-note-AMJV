@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ForceField : MonoBehaviour
@@ -12,9 +10,8 @@ public class ForceField : MonoBehaviour
     {
         if(other.TryGetComponent(out IPushable pushable))
         {
-            Vector3 direction = transform.position - other.transform.position;
+            Vector3 direction = other.transform.position - transform.position;
             direction.y = 0;
-
             pushable.Push(direction * repulsiveForce);
         }
     }
