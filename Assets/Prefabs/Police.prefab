@@ -4839,11 +4839,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1792445040910967086}
+  - component: {fileID: 5731811123534460491}
   - component: {fileID: 8863321258601266986}
   - component: {fileID: 1529605283843149246}
   - component: {fileID: 4271866391140875893}
   - component: {fileID: 4026353170182829151}
-  - component: {fileID: 5731811123534460491}
   - component: {fileID: 290671371489791005}
   m_Layer: 0
   m_Name: Police
@@ -4868,6 +4868,19 @@ Transform:
   - {fileID: 5853225004136099870}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5731811123534460491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902774106013387242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffabd7a73fb958c428d462db0f328582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  police: {fileID: 4026353170182829151}
 --- !u!33 &8863321258601266986
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4961,19 +4974,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5731811123534460491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2902774106013387242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffabd7a73fb958c428d462db0f328582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  police: {fileID: 4026353170182829151}
 --- !u!54 &290671371489791005
 Rigidbody:
   m_ObjectHideFlags: 0

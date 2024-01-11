@@ -18,7 +18,9 @@ public class UpDownAnimation : MonoBehaviour
 
     private void Start()
     {
+        isAnimating = false;
         basePosition = transform.position;
+        ToogleAnimation(true);
     }
 
     public void Reset()

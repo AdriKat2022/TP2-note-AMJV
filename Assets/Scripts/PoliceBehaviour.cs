@@ -17,7 +17,7 @@ public class PoliceBehaviour : MonoBehaviour
     }
     void Update()
     {
-        police.SetDestination(target.transform.position);       
+        police.SetDestination(target.transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -38,8 +38,6 @@ public class CarMovement : MonoBehaviour
 
     [Header("Boost")]
     [SerializeField]
-    private float boostMaxspeed;
-    [SerializeField]
     private float boostForce;
     [SerializeField]
     private float boostDuration;

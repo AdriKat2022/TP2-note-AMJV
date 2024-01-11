@@ -1,14 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ForceFieldPowerUp : MonoBehaviour, ICollectable
+public class ForceFieldPowerUp : MonoBehaviour
 {
     [SerializeField]
     private float duration;
 
-    public void Collect()
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if(other.TryGetComponent(out PowerUpsApplication player))
+        {
+            player.ActivateForceFieldFor(duration);
+            Destroy(gameObject);
+        }
     }
 }

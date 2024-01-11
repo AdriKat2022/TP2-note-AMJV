@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUpsApplication : MonoBehaviour
@@ -7,11 +6,16 @@ public class PowerUpsApplication : MonoBehaviour
     [SerializeField]
     private GameObject forceField;
 
+    private void Start()
+    {
+        forceField.SetActive(false);
+    }
+
+
     public void ActivateForceFieldFor(float duration)
     {
         StartCoroutine(ForceFieldFor(duration));
     }
-
     private IEnumerator ForceFieldFor(float duration)
     {
         float timer = duration;
