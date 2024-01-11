@@ -58,15 +58,27 @@ public class CarMovement : MonoBehaviour
 
     private PlayerInput playerInput;
 
+    [Header("Visual")]
+    [SerializeField]
+    private ParticleSystem boostParticlesSystem;
+    [SerializeField]
+    private TrailRenderer leftRenderer;
+    [SerializeField]
+    private TrailRenderer rightRenderer;
 
+    private ParticleSystem.EmissionModule boostParticles;
 
     private void Start()
     {
+        boostParticles = boostParticlesSystem.emission;
         TryGetComponent(out rb);
 
         currentSpeed = 0;
 
         boostTimer = boostCooldown;
+
+        DeactivateDrift();
+        DeactivateBoost();
     }
 
 
@@ -85,6 +97,28 @@ public class CarMovement : MonoBehaviour
         CheckBoostInput();
     }
 
+
+    private void DeactivateBoost()
+    {
+        boostParticles.enabled = false;
+        isBoosting = false;
+    }
+    private void ActivateBoost()
+    {
+        boostParticles.enabled = true;
+        isBoosting = true;
+    }
+    private void ActivateDrift()
+    {
+        leftRenderer.emitting = true;
+        rightRenderer.emitting = true;
+    }
+    private void DeactivateDrift()
+    {
+        leftRenderer.emitting = false;
+        rightRenderer.emitting = false;
+    }
+
     private void CheckBoostInput()
     {
         boostTimer += Time.deltaTime;
@@ -99,6 +133,10 @@ public class CarMovement : MonoBehaviour
     private void TurnCar()
     {
         transform.Rotate(Time.deltaTime * playerInput.horizontalAxis * turningSpeed * Vector3.up);
+        if(playerInput.horizontalAxis != 0)
+            ActivateDrift();
+        else
+            DeactivateDrift();
     }
 
     private void Move()
@@ -125,7 +163,7 @@ public class CarMovement : MonoBehaviour
 
     private IEnumerator Boosting()
     {
-        isBoosting = true;
+        ActivateBoost();
 
         float timer = 0;
 
@@ -136,7 +174,7 @@ public class CarMovement : MonoBehaviour
             timer += Time.deltaTime;
             if(timer > boostDuration)
             {
-                isBoosting = false;
+                DeactivateBoost();
                 yield break;
             }
 
@@ -144,6 +182,4 @@ public class CarMovement : MonoBehaviour
             yield return null;
         }
     }
-
-    private void StopBoost() => isBoosting = false;
 }
