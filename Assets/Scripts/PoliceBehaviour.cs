@@ -6,23 +6,27 @@ using UnityEngine.AI;
 public class PoliceBehaviour : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent police;
-    [SerializeField] private Transform target;
+    private GameObject target;
 
     private ParticleSystem ps;
 
     private void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player");
         ps = GetComponentInChildren<ParticleSystem>();
     }
     void Update()
     {
-        police.SetDestination(target.position);       
+        police.SetDestination(target.transform.position);       
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        ps.transform.parent = null;
-        ps.Play();
-        Destroy(this.gameObject); 
+        if (!collision.gameObject.CompareTag("Ground"))
+        {
+            ps.transform.parent = null;
+            ps.Play();
+            Destroy(this.gameObject);
+        }
     }
 }
